@@ -12,7 +12,7 @@ A containerized FastAPI service to manage a bookstore.
 | `LOG_LEVEL`       | `INFO`                                   | Root logger level (e.g. DEBUG, INFO, WARNING).                   |
 | `LOG_FORMAT`      | `%(levelname)s:%(name)s:%(message)s`     | Python `logging` format string.                                  |
 | `PAGE_SIZE`       | `10`                                     | Number of items per page on the `/books/` endpoint.              |
-| `APP_ENV`         | `dev`                                    | App environment label (e.g. dev / staging / prod).               |
+| `APP_ENV`         | `dev`                                    | App environment label (e.g. dev / staging /prod).                |
 | `HOST`            | `0.0.0.0`                                | Uvicorn host binding.                                            |
 | `PORT`            | `8080`                                   | Uvicorn port.                                                    |
 | `RELOAD`          | `False`                                  | Whether Uvicorn runs in reload mode (`True`/`False`).            |
@@ -36,7 +36,7 @@ docker build -t docker-pipeline-demo .
 docker run -p 8080:8080 docker-pipeline-demo
 ```
 
-The service will be running on [http://localhost:8080/books](http://localhost:8080/books)
+Then go to [http://localhost:8080/books](http://localhost:8080/books)
 
 ---
 
@@ -54,5 +54,70 @@ Image: `ghcr.io/nicosmuts/docker-pipeline-demo:latest`
 | Secret Name   | Description                        |
 |---------------|------------------------------------|
 | `GHCR_TOKEN`  | GitHub token with packages access  |
+
+---
+
+## ☸️ Helm Chart Overview
+
+This chart supports multiple environments using different `values-{env}.yaml` files.
+
+### Example Commands
+
+```bash
+# Deploy to dev
+helm upgrade --install books-api-dev ./charts/books-api -f charts/books-api/values-dev.yaml --namespace dev --create-namespace
+
+# Deploy to staging
+helm upgrade --install books-api-staging ./charts/books-api -f charts/books-api/values-staging.yaml --namespace staging --create-namespace
+
+# Deploy to production
+helm upgrade --install books-api-prod ./charts/books-api -f charts/books-api/values-prod.yaml --namespace prod --create-namespace
+```
+
+---
+
+## 🧪 Helm Testing
+
+### Lint the chart
+
+```bash
+helm lint ./charts/books-api
+```
+
+### Render templates
+
+```bash
+helm template books-api-dev ./charts/books-api -f charts/books-api/values-dev.yaml
+```
+
+---
+
+## 🐳 KIND: Local Kubernetes Testing
+
+### Prerequisites
+
+- Docker Desktop with WSL 2 backend
+- KIND installed
+- Helm installed
+
+### Create KIND cluster
+
+```bash
+kind create cluster --name books-api
+```
+
+### Deploy Helm chart to KIND
+
+```bash
+helm upgrade --install books-api-dev ./charts/books-api -f charts/books-api/values-dev.yaml --namespace dev --create-namespace
+```
+
+### Port-forward to access the app
+
+```bash
+kubectl port-forward svc/books-api-dev-books-api 8080:80 -n dev
+```
+
+Then go to [http://localhost:8080/books](http://localhost:8080/books)
 
 ---
