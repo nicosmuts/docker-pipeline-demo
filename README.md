@@ -121,3 +121,12 @@ kubectl port-forward svc/books-api-dev-books-api 8080:80 -n dev
 Then go to [http://localhost:8080/books](http://localhost:8080/books)
 
 ---
+
+## Improvements (to-do)
+
+- External database (RDS / MySQL chart on K8S)
+- Persistent storage and/or external storage (NFS / S3)
+- Prometheus monitoring
+- Grafana dashboard
+- Alerting
+- Security testing (SonarQube)
