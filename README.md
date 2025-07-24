@@ -39,3 +39,20 @@ docker run -p 8080:8080 docker-pipeline-demo
 The service will be running on [http://localhost:8080/books](http://localhost:8080/books)
 
 ---
+
+## 🚀 CI/CD with GitHub Actions
+
+Every push to `main` will:
+
+- Build the Docker image
+- Push it to GitHub Container Registry (GHCR)
+
+Image: `ghcr.io/nicosmuts/docker-pipeline-demo:latest`
+
+### Required GitHub Secrets
+
+| Secret Name   | Description                        |
+|---------------|------------------------------------|
+| `GHCR_TOKEN`  | GitHub token with packages access  |
+
+---
