@@ -1,5 +1,10 @@
-**Bookstore API Config**
+# 📚 Bookstore API
 
+A containerized FastAPI service to manage a bookstore.
+
+---
+
+## ⚙️ Environment Configuration
 
 | Variable          | Default                                  | Description                                                      |
 |-------------------|------------------------------------------|------------------------------------------------------------------|
@@ -14,3 +19,23 @@
 | `ALLOWED_ORIGINS` | `*`                                      | Comma-separated list for CORS allowed origins (`*` = all).       |
 | `DB_POOL_SIZE`    | `5`                                      | SQLAlchemy connection-pool size.                                 |
 | `DB_MAX_OVERFLOW` | `10`                                     | SQLAlchemy max overflow connections beyond the pool size.        |
+
+---
+
+## 🐳 Docker
+
+### Build
+
+```bash
+docker build -t docker-pipeline-demo .
+```
+
+### Run
+
+```bash
+docker run -p 8080:8080 docker-pipeline-demo
+```
+
+The service will be running on [http://localhost:8080/books](http://localhost:8080/books)
+
+---
