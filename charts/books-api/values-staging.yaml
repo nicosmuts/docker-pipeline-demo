@@ -1,0 +1,27 @@
+replicaCount: 2
+
+image:
+  repository: ghcr.io/nicosmuts/docker-pipeline-demo
+  tag: staging
+  pullPolicy: Always
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8080
+
+ingress:
+  enabled: true
+  host: staging.books.example.com
+
+resources:
+  requests:
+    cpu: "250m"
+    memory: "256Mi"
+
+env:
+  APP_ENV: "staging"
+  LOG_LEVEL: "INFO"
+  PAGE_SIZE: "10"
+  PORT: "8080"
+  ALLOWED_ORIGINS: "*"

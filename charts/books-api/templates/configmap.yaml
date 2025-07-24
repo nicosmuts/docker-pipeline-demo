@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "books-api.fullname" . }}-config
+data:
+  APP_ENV: {{ .Values.env.APP_ENV | quote }}
+  LOG_LEVEL: {{ .Values.env.LOG_LEVEL | quote }}
+  PAGE_SIZE: {{ .Values.env.PAGE_SIZE | quote }}
+  ALLOWED_ORIGINS: {{ .Values.env.ALLOWED_ORIGINS | quote }}

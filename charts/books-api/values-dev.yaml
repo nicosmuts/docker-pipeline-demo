@@ -1,0 +1,27 @@
+replicaCount: 1
+
+image:
+  repository: ghcr.io/nicosmuts/docker-pipeline-demo
+  tag: latest
+  pullPolicy: Always
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8080
+
+ingress:
+  enabled: true
+  host: dev.books.example.com
+
+resources:
+  requests:
+    cpu: "100m"
+    memory: "128Mi"
+
+env:
+  APP_ENV: "dev"
+  LOG_LEVEL: "DEBUG"
+  PAGE_SIZE: "10"
+  PORT: "8080"
+  ALLOWED_ORIGINS: "*"
