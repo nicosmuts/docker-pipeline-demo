@@ -127,9 +127,17 @@ Then go to [http://localhost:8080/books](http://localhost:8080/books)
 - External database (RDS / MySQL chart on K8S)
 - Persistent storage and/or external storage (NFS / S3)
 - Prometheus monitoring
+- Logging (Loki)
 - Grafana dashboard
 - Alerting
 - Multi-stage deployment pipeline
     - dev -> staging -> prod
     - Security testing (SonarQube)
     - QA testing
+
+### External Systems / Dependencies:
+
+- Kubernetes
+- Prometheus
+- Grafana
+- SonarQube
